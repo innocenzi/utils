@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes, replaceFirst, replaceLast, before, beforeLast, after, afterLast, between, betweenShrink } from './string'
+import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes, replaceFirst, replaceLast, before, beforeLast, after, afterLast, between, betweenShrink, squish } from './string'
 
 it('template', () => {
 	expect(
@@ -216,4 +216,10 @@ it('betweenShrink', () => {
 	expect(betweenShrink('[a]ab[b]', '[', ']')).toEqual('a')
 	expect(betweenShrink('foofoobar', 'foo', 'bar')).toEqual('foo')
 	expect(betweenShrink('foobarbar', 'foo', 'bar')).toEqual('')
+})
+
+it('squish', () => {
+	expect(squish('    hello    world    ')).toEqual('hello world')
+	expect(squish(' \t hello \t   world  \t  ')).toEqual('hello world')
+	expect(squish(' \t hello\n \t   world  \t\n  ')).toEqual('hello world')
 })

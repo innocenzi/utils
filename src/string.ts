@@ -170,6 +170,13 @@ export function ensureEndsWith(suffix: string, str: string) {
 }
 
 /**
+ * Removes duplicate spaces from a string.
+ */
+export function squish(str: string) {
+	return str.replace(/\s+/g, ' ').trim()
+}
+
+/**
  * Dead simple template engine, just like Python's `.format()`
  * Support passing variables as either in index based or object/name based approach
  * While using object/name based approach, you can pass a fallback value as the third argument
