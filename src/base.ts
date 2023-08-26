@@ -4,7 +4,7 @@ export function assert(condition: boolean, message: string): asserts condition {
 	}
 }
 
-export function toString(v: any) {
+export function getTypeAsString(v: any) {
 	return Object.prototype.toString.call(v)
 }
 
@@ -13,7 +13,7 @@ export function getTypeName(v: any) {
 		return 'null'
 	}
 
-	const type = toString(v).slice(8, -1).toLowerCase()
+	const type = getTypeAsString(v).slice(8, -1).toLowerCase()
 
 	return (typeof v === 'object' || typeof v === 'function')
 		? type
