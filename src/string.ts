@@ -68,6 +68,24 @@ export function beforeLast(str: string, separator: string | number) {
 }
 
 /**
+ * Returns everything after the given value.
+ *
+ * @category String
+ */
+export function after(str: string, separator: string | number) {
+	if (separator.toString() === '') {
+		return str
+	}
+
+	const index = str.indexOf(separator.toString())
+	if (index === -1) {
+		return str
+	}
+
+	return str.slice(index + separator.toString().length)
+}
+
+/**
  * Replaces the first occurrence of a given value in a string.
  *
  * @category String
