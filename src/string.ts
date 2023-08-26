@@ -43,6 +43,22 @@ export function replaceFirst(search: string | number, replace: string | number, 
 }
 
 /**
+ * Replaces the last occurrence of a given value in a string.
+ */
+export function replaceLast(search: string | number, replace: string | number, str: string) {
+	if (search.toString() === '') {
+		return str
+	}
+
+	const index = str.lastIndexOf(search.toString())
+	if (index === -1) {
+		return str
+	}
+
+	return str.slice(0, index) + replace.toString() + str.slice(index + search.toString().length)
+}
+
+/**
  * Ensures the given string ends with the given suffix.
  *
  * @category String

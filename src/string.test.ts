@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes, replaceFirst } from './string'
+import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes, replaceFirst, replaceLast } from './string'
 
 it('template', () => {
 	expect(
@@ -127,17 +127,24 @@ it('capitalize', () => {
 })
 
 it('replaceFirst', () => {
-	// $this->assertSame('fooqux foobar', Str::replaceFirst('bar', 'qux', 'foobar foobar'));
-	// $this->assertSame('foo/qux? foo/bar?', Str::replaceFirst('bar?', 'qux?', 'foo/bar? foo/bar?'));
-	// $this->assertSame('foo foobar', Str::replaceFirst('bar', '', 'foobar foobar'));
-	// $this->assertSame('foobar foobar', Str::replaceFirst('xxx', 'yyy', 'foobar foobar'));
-	// $this->assertSame('foobar foobar', Str::replaceFirst('', 'yyy', 'foobar foobar'));
-	// $this->assertSame('1', Str::replaceFirst(0, '1', '0'));
-
 	expect(replaceFirst('bar', 'qux', 'foobar foobar')).toEqual('fooqux foobar')
 	expect(replaceFirst('bar?', 'qux?', 'foo/bar? foo/bar?')).toEqual('foo/qux? foo/bar?')
 	expect(replaceFirst('bar', '', 'foobar foobar')).toEqual('foo foobar')
 	expect(replaceFirst('xxx', 'yyy', 'foobar foobar')).toEqual('foobar foobar')
 	expect(replaceFirst('', 'yyy', 'foobar foobar')).toEqual('foobar foobar')
 	expect(replaceFirst(0, '1', '0')).toEqual('1')
+})
+
+it('replaceLast', () => {
+	// $this->assertSame('foobar fooqux', Str::replaceLast('bar', 'qux', 'foobar foobar'));
+	// $this->assertSame('foo/bar? foo/qux?', Str::replaceLast('bar?', 'qux?', 'foo/bar? foo/bar?'));
+	// $this->assertSame('foobar foo', Str::replaceLast('bar', '', 'foobar foobar'));
+	// $this->assertSame('foobar foobar', Str::replaceLast('xxx', 'yyy', 'foobar foobar'));
+	// $this->assertSame('foobar foobar', Str::replaceLast('', 'yyy', 'foobar foobar'));
+
+	expect(replaceLast('bar', 'qux', 'foobar foobar')).toEqual('foobar fooqux')
+	expect(replaceLast('bar?', 'qux?', 'foo/bar? foo/bar?')).toEqual('foo/bar? foo/qux?')
+	expect(replaceLast('bar', '', 'foobar foobar')).toEqual('foobar foo')
+	expect(replaceLast('xxx', 'yyy', 'foobar foobar')).toEqual('foobar foobar')
+	expect(replaceLast('', 'yyy', 'foobar foobar')).toEqual('foobar foobar')
 })
