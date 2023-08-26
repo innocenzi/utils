@@ -2,7 +2,7 @@
 
 <p align="center">
   <br />
-  <a href="https://github.com/innocenzi/utils/actions?query=workflow%3Aci"><img alt="Status" src="https://github.com/innocenzi/utils/workflows/ci/badge.svg"></a>
+  <a href="https://github.com/innocenzi/utils/actions/workflows/ci.yml"><img alt="Status" src="https://github.com/innocenzi/utils/actions/workflows/ci.yml/badge.svg"></a>
   <span>&nbsp;</span>
   <a href="https://github.com/innocenzi/utils/releases"><img alt="version" src="https://img.shields.io/github/v/release/innocenzi/utils?include_prereleases&label=version&logo=github&logoColor=white"></a>
   <br />
