@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes } from './string'
+import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes, replaceFirst } from './string'
 
 it('template', () => {
 	expect(
@@ -124,4 +124,20 @@ it('capitalize', () => {
 	expect(capitalize('中国')).toEqual('中国')
 	expect(capitalize('āÁĂÀ')).toEqual('Āáăà')
 	expect(capitalize('\a')).toEqual('A')
+})
+
+it('replaceFirst', () => {
+	// $this->assertSame('fooqux foobar', Str::replaceFirst('bar', 'qux', 'foobar foobar'));
+	// $this->assertSame('foo/qux? foo/bar?', Str::replaceFirst('bar?', 'qux?', 'foo/bar? foo/bar?'));
+	// $this->assertSame('foo foobar', Str::replaceFirst('bar', '', 'foobar foobar'));
+	// $this->assertSame('foobar foobar', Str::replaceFirst('xxx', 'yyy', 'foobar foobar'));
+	// $this->assertSame('foobar foobar', Str::replaceFirst('', 'yyy', 'foobar foobar'));
+	// $this->assertSame('1', Str::replaceFirst(0, '1', '0'));
+
+	expect(replaceFirst('bar', 'qux', 'foobar foobar')).toEqual('fooqux foobar')
+	expect(replaceFirst('bar?', 'qux?', 'foo/bar? foo/bar?')).toEqual('foo/qux? foo/bar?')
+	expect(replaceFirst('bar', '', 'foobar foobar')).toEqual('foo foobar')
+	expect(replaceFirst('xxx', 'yyy', 'foobar foobar')).toEqual('foobar foobar')
+	expect(replaceFirst('', 'yyy', 'foobar foobar')).toEqual('foobar foobar')
+	expect(replaceFirst(0, '1', '0')).toEqual('1')
 })

@@ -32,6 +32,17 @@ export function ensureStartsWith(prefix: string, str: string) {
 }
 
 /**
+ * Replaces the first occurrence of a given value in a string.
+ */
+export function replaceFirst(search: string | number, replace: string | number, str: string) {
+	if (search.toString() === '') {
+		return str
+	}
+
+	return str.replace(search.toString(), replace.toString())
+}
+
+/**
  * Ensures the given string ends with the given suffix.
  *
  * @category String
