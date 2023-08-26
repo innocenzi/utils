@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes, replaceFirst, replaceLast, before, beforeLast, after, afterLast, between, betweenShrink, squish } from './string'
+import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes, replaceFirst, replaceLast, before, beforeLast, after, afterLast, between, betweenShrink, squish, mask } from './string'
 
 it('template', () => {
 	expect(
@@ -222,4 +222,19 @@ it('squish', () => {
 	expect(squish('    hello    world    ')).toEqual('hello world')
 	expect(squish(' \t hello \t   world  \t  ')).toEqual('hello world')
 	expect(squish(' \t hello\n \t   world  \t\n  ')).toEqual('hello world')
+})
+
+it('mask', () => {
+	// expect(mask('taylor@email.com', '*', 3)).toEqual('tay*************')
+	// expect(mask('taylor@email.com', '*', 0, 6)).toEqual('******@email.com')
+	// expect(mask('taylor@email.com', '*', -13)).toEqual('tay*************')
+	expect(mask('taylor@email.com', '*', -13, 3)).toEqual('tay***@email.com')
+	// expect(mask('taylor@email.com', '*', -17)).toEqual('****************')
+	// expect(mask('taylor@email.com', '*', -99, 5)).toEqual('*****r@email.com')
+	// expect(mask('taylor@email.com', '*', 16)).toEqual('taylor@email.com')
+	// expect(mask('taylor@email.com', '*', 16, 99)).toEqual('taylor@email.com')
+	// expect(mask('taylor@email.com', '', 3)).toEqual('taylor@email.com')
+	// expect(mask('taylor@email.com', 'something', 3)).toEqual('taysssssssssssss')
+	// expect(mask('这是一段中文', '*', 3)).toEqual('这是一***')
+	// expect(mask('这是一段中文', '*', 0, 2)).toEqual('**一段中文')
 })

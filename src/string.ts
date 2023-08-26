@@ -177,6 +177,31 @@ export function squish(str: string) {
 }
 
 /**
+ * Masks a portion of a string with a repeated character.
+ */
+export function mask(str: string, mask: string, index: number, length?: number) {
+	if (mask === '') {
+		return str
+	}
+
+	let startIndex = index
+	if (index < 0) {
+		startIndex = (index < -str.length) ? 0 : (str.length + index)
+	}
+
+	const segment = str.slice(startIndex, length ? startIndex + length : undefined)
+
+	if (segment === '') {
+		return str
+	}
+
+	const start = str.slice(0, startIndex)
+	const end = str.slice(startIndex + segment.length)
+
+	return start + mask.repeat(segment.length) + end
+}
+
+/**
  * Dead simple template engine, just like Python's `.format()`
  * Support passing variables as either in index based or object/name based approach
  * While using object/name based approach, you can pass a fallback value as the third argument
