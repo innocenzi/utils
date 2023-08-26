@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes, replaceFirst, replaceLast, before, beforeLast, after, afterLast } from './string'
+import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes, replaceFirst, replaceLast, before, beforeLast, after, afterLast, between, betweenShrink } from './string'
 
 it('template', () => {
 	expect(
@@ -188,4 +188,32 @@ it('afterLast', () => {
 	expect(afterLast('yv0et0te', 0)).toEqual('te')
 	expect(afterLast('yv2et2te', 2)).toEqual('te')
 	expect(afterLast('----foo', '---')).toEqual('foo')
+})
+
+it('between', () => {
+	expect(between('abc', '', 'c')).toEqual('abc')
+	expect(between('abc', 'a', '')).toEqual('abc')
+	expect(between('abc', '', '')).toEqual('abc')
+	expect(between('abc', 'a', 'c')).toEqual('b')
+	expect(between('dddabc', 'a', 'c')).toEqual('b')
+	expect(between('abcddd', 'a', 'c')).toEqual('b')
+	expect(between('dddabcddd', 'a', 'c')).toEqual('b')
+	expect(between('hannah', 'ha', 'ah')).toEqual('nn')
+	expect(between('[a]ab[b]', '[', ']')).toEqual('a]ab[b')
+	expect(between('foofoobar', 'foo', 'bar')).toEqual('foo')
+	expect(between('foobarbar', 'foo', 'bar')).toEqual('bar')
+})
+
+it('betweenShrink', () => {
+	expect(betweenShrink('abc', '', 'c')).toEqual('abc')
+	expect(betweenShrink('abc', 'a', '')).toEqual('abc')
+	expect(betweenShrink('abc', '', '')).toEqual('abc')
+	expect(betweenShrink('abc', 'a', 'c')).toEqual('b')
+	expect(betweenShrink('dddabc', 'a', 'c')).toEqual('b')
+	expect(betweenShrink('abcddd', 'a', 'c')).toEqual('b')
+	expect(betweenShrink('dddabcddd', 'a', 'c')).toEqual('b')
+	expect(betweenShrink('hannah', 'ha', 'ah')).toEqual('nn')
+	expect(betweenShrink('[a]ab[b]', '[', ']')).toEqual('a')
+	expect(betweenShrink('foofoobar', 'foo', 'bar')).toEqual('foo')
+	expect(betweenShrink('foobarbar', 'foo', 'bar')).toEqual('')
 })

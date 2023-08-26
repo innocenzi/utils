@@ -104,6 +104,28 @@ export function afterLast(str: string, separator: string | number) {
 }
 
 /**
+ * Gets the portion of a string between two given values.
+ */
+export function between(str: string, start: string | number, end: string | number) {
+	if (start.toString() === '' || end.toString() === '') {
+		return str
+	}
+
+	return beforeLast(after(str, start), end)
+}
+
+/**
+ * Gets the smallest possible portion of a string between two given values.
+ */
+export function betweenShrink(str: string, start: string | number, end: string | number) {
+	if (start.toString() === '' || end.toString() === '') {
+		return str
+	}
+
+	return before(after(str, start), end)
+}
+
+/**
  * Replaces the first occurrence of a given value in a string.
  *
  * @category String
