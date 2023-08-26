@@ -1,5 +1,8 @@
 {
     "name": "@innocenzi/utils",
+    "publishConfig": {
+        "access": "public"
+    },
     "version": "0.1.0",
     "description": "Opinionated collection of TypeScript utilities",
     "keywords": [
