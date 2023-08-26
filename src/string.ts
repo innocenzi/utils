@@ -32,7 +32,27 @@ export function ensureStartsWith(prefix: string, str: string) {
 }
 
 /**
+ * Returns everything before the given value.
+ *
+ * @category String
+ */
+export function before(str: string, separator: string | number) {
+	if (separator.toString() === '') {
+		return str
+	}
+
+	const index = str.indexOf(separator.toString())
+	if (index === -1) {
+		return str
+	}
+
+	return str.slice(0, index)
+}
+
+/**
  * Replaces the first occurrence of a given value in a string.
+ *
+ * @category String
  */
 export function replaceFirst(search: string | number, replace: string | number, str: string) {
 	if (search.toString() === '') {
@@ -44,6 +64,8 @@ export function replaceFirst(search: string | number, replace: string | number, 
 
 /**
  * Replaces the last occurrence of a given value in a string.
+ *
+ * @category String
  */
 export function replaceLast(search: string | number, replace: string | number, str: string) {
 	if (search.toString() === '') {
