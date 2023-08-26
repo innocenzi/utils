@@ -13,7 +13,7 @@
 <br />
 
 <div align="center">
-  An opinionated collection of TypeScript utilities. Forked from https://github.com/antfu/utils and modified to my needs.
+  An opinionated collection of TypeScript utilities. Forked from <a href="https://github.com/antfu/utils">antfu/utils</a> and modified to my needs.
   <br />
   This package is designed to be used as a development dependency and bundled into your dist.
 </div>
