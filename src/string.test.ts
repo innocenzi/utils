@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes, replaceFirst, replaceLast, before } from './string'
+import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes, replaceFirst, replaceLast, before, beforeLast } from './string'
 
 it('template', () => {
 	expect(
@@ -152,4 +152,16 @@ it('before', () => {
 	expect(before('han0nah', '0')).toEqual('han')
 	expect(before('han0nah', 0)).toEqual('han')
 	expect(before('han2nah', 2)).toEqual('han')
+})
+
+it('beforeLast', () => {
+	expect(beforeLast('yvette', 'tte')).toEqual('yve')
+	expect(beforeLast('yvette', 't')).toEqual('yvet')
+	expect(beforeLast('ééé yvette', 'yve')).toEqual('ééé ')
+	expect(beforeLast('yvette', 'yve')).toEqual('')
+	expect(beforeLast('yvette', 'xxxx')).toEqual('yvette')
+	expect(beforeLast('yvette', '')).toEqual('yvette')
+	expect(beforeLast('yv0et0te', '0')).toEqual('yv0et')
+	expect(beforeLast('yv0et0te', 0)).toEqual('yv0et')
+	expect(beforeLast('yv2et2te', 2)).toEqual('yv2et')
 })

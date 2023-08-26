@@ -50,6 +50,24 @@ export function before(str: string, separator: string | number) {
 }
 
 /**
+ * Returns everything before the last occurrence of the given value.
+ *
+ * @category String
+ */
+export function beforeLast(str: string, separator: string | number) {
+	if (separator.toString() === '') {
+		return str
+	}
+
+	const index = str.lastIndexOf(separator.toString())
+	if (index === -1) {
+		return str
+	}
+
+	return str.slice(0, index)
+}
+
+/**
  * Replaces the first occurrence of a given value in a string.
  *
  * @category String
