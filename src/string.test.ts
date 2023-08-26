@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { capitalize, ensureStartsWith, ensureEndsWith, slash, template } from './string'
+import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes } from './string'
 
 it('template', () => {
 	expect(
@@ -96,10 +96,16 @@ it('namedTemplate', () => {
 	).toEqual('2 4 6 known key')
 })
 
-it('slash', () => {
-	expect(slash('\\123')).toEqual('/123')
-	expect(slash('\\\\')).toEqual('//')
-	expect(slash('\\\h\\\i')).toEqual('/h/i')
+it('toForwardSlashes', () => {
+	expect(toForwardSlashes('\\123')).toEqual('/123')
+	expect(toForwardSlashes('\\\\')).toEqual('//')
+	expect(toForwardSlashes('\\\h\\\i')).toEqual('/h/i')
+})
+
+it('toBackSlashes', () => {
+	expect(toBackSlashes('/123')).toEqual('\\123')
+	expect(toBackSlashes('//')).toEqual('\\\\')
+	expect(toBackSlashes('/\h/\i')).toEqual('\\h\\i')
 })
 
 it('ensurePrefix', () => {

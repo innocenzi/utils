@@ -5,8 +5,17 @@ import { isObject } from './is'
  *
  * @category String
  */
-export function slash(str: string) {
+export function toForwardSlashes(str: string) {
 	return str.replace(/\\/g, '/')
+}
+
+/**
+ * Replaces forward slashes with backslashes.
+ *
+ * @category String
+ */
+export function toBackSlashes(str: string) {
+	return str.replace(/\//g, '\\')
 }
 
 /**
