@@ -35,14 +35,36 @@ it('match', () => {
 		bar: '2',
 	})).toEqual('1')
 
+	expect(match('foo' as 'foo' | 'bar', {
+		foo: '1',
+		bar: '2',
+		default: 'nope',
+	})).toEqual('1')
+
 	expect(match('owo' as 'foo' | 'bar', {
 		foo: '1',
 		bar: '2',
 		default: 'uwu',
 	})).toEqual('uwu')
 
+	// @ts-expect-error missing 'default' or 'bar'
+	expect(match('foo' as 'foo' | 'bar', {
+		foo: () => '1',
+	})).toBe('1')
+
 	expect(match('foo' as 'foo' | 'bar', {
 		foo: () => '1',
 		bar: () => '2',
+	})).toBe('1')
+
+	expect(match(undefined as 'foo' | 'bar' | undefined, {
+		foo: () => '1',
+		bar: () => '2',
+		default: 'foo',
+	})).toBe('foo')
+
+	expect(match('foo' as 'foo' | 'bar' | undefined, {
+		bar: () => '2',
+		default: '1',
 	})).toBe('1')
 })

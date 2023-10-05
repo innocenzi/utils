@@ -66,9 +66,11 @@ export function tap<T>(value: T, callback: (value: T) => void): T {
 }
 
 type MaybeCallable<T> = T | ((...args: any[]) => T)
-type Lookup<TValue extends string | number = string, TReturnValue = unknown> = Record<TValue, MaybeCallable<TReturnValue>> & {
-	default?: MaybeCallable<TReturnValue>
+interface DefaultLookup<TReturnValue> {
+	default: MaybeCallable<TReturnValue>
 }
+
+type Lookup<TValue extends string | number | undefined = string, TReturnValue = unknown> = { [K in NonNullable<TValue>]: MaybeCallable<TReturnValue> }
 
 /**
  * Matches a value against a lookup table.
@@ -82,11 +84,21 @@ type Lookup<TValue extends string | number = string, TReturnValue = unknown> = R
  *  default: 'default', // optional
  * })
  */
-export function match<TValue extends string | number = string, TReturnValue = unknown>(
+export function match<
+	TValue extends string | number | undefined,
+	TReturnValue = unknown,
+	TLookup extends(Lookup<TValue, TReturnValue> | (Partial<Lookup<TValue, TReturnValue>> & DefaultLookup<TReturnValue>)) = Lookup<TValue, TReturnValue>,
+>(
 	value: TValue,
-	lookup: Lookup<TValue, TReturnValue>,
+	lookup: TLookup,
 	...args: any[]
 ): TReturnValue {
+	if (value === undefined) {
+		// @ts-expect-error
+		const returnValue = lookup.default
+		return isFunction(returnValue) ? returnValue(...args) : returnValue!
+	}
+
 	if (value in lookup) {
 		const returnValue = lookup[value]
 		return isFunction(returnValue) ? returnValue(...args) : returnValue
