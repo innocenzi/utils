@@ -154,7 +154,7 @@ export function range(...args: any): number[] {
 
 	const arr: number[] = []
 	let current = start
-	while (current < stop) {
+	while (step > 0 ? (current < stop) : (current > stop)) {
 		arr.push(current)
 		current += step || 1
 	}
