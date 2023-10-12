@@ -199,6 +199,15 @@ export function objectPick<O extends object, T extends keyof O>(obj: O, keys: T[
 }
 
 /**
+ * Creates a new object without the specified keys.
+ *
+ * @category Object
+ */
+export function objectOmit<O extends object, T extends keyof O>(obj: O, keys: T[], omitUndefined = false): Omit<O, T> {
+	return objectPick(obj, objectKeys(obj).filter((k) => !keys.includes(k as any)) as any, omitUndefined)
+}
+
+/**
  * Clears undefined fields from an object. It mutates the object.
  *
  * @category Object

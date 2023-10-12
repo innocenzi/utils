@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { deepMerge, deepMergeWithArray, objectMap } from './object'
+import { deepMerge, deepMergeWithArray, objectMap, objectOmit } from './object'
 
 it('objectMap', () => {
 	expect(objectMap({}, (...args) => args)).toEqual({})
@@ -76,4 +76,13 @@ describe('deepMergeWithArray', () => {
 		const obj2 = { a: ['C'], b: ['D'] }
 		expect(deepMergeWithArray({}, obj1, obj2)).toEqual({ a: ['A', 'B', 'C'], b: ['D'] })
 	})
+})
+
+it('objectOmit', () => {
+	const obj = {
+		foo: 'bar',
+		baz: 'qux',
+	}
+
+	expect(objectOmit(obj, ['foo'])).toEqual({ baz: 'qux' })
 })
