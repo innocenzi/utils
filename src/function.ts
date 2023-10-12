@@ -93,14 +93,8 @@ export function match<
 	lookup: TLookup,
 	...args: any[]
 ): TReturnValue {
-	if (value === undefined) {
-		// @ts-expect-error
-		const returnValue = lookup.default
-		return isFunction(returnValue) ? returnValue(...args) : returnValue!
-	}
-
-	if (value in lookup) {
-		const returnValue = lookup[value]
+	if (value! in lookup) {
+		const returnValue = lookup[value!]
 		return isFunction(returnValue) ? returnValue(...args) : returnValue
 	}
 
