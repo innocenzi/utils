@@ -1,4 +1,4 @@
-import { expect, it } from 'vitest'
+import { expect, expectTypeOf, it } from 'vitest'
 import { asyncInvoke, invoke, match, tap, value } from './function'
 
 it('invoke', async() => {
@@ -67,4 +67,19 @@ it('match', () => {
 		bar: () => '2',
 		default: '1',
 	})).toBe('1')
+
+	expect(match(123, {
+		100: 'foo',
+		200: 'bar',
+		default: 'baz',
+	})).toBe('baz')
+
+	expectTypeOf(match('foo', { foo: () => 1, bar: () => 2 })).toBeNumber()
+	expectTypeOf(match('foo', { foo: () => 'a', bar: () => 'b' })).toBeString()
+	expectTypeOf(match('foo', { foo: () => 'a', bar: () => 'b', default: () => 'c' })).toBeString()
+	expectTypeOf(match('foo', { foo: 1, bar: 2 })).toBeNumber()
+	expectTypeOf(match('foo', { baz: 1, bar: 2, default: 3 })).toBeNumber()
+	expectTypeOf(match(123, { 123: 'foo', 200: 'bar' })).toBeString()
+	expectTypeOf(match(123, { 100: 'foo', 200: 'bar', default: 'baz' })).toBeString()
+	expectTypeOf(match('bar' as string | number, { foo: 'a', default: 'b' })).toMatchTypeOf<string | number>()
 })

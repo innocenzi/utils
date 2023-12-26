@@ -70,7 +70,9 @@ interface DefaultLookup<TReturnValue> {
 	default: MaybeCallable<TReturnValue>
 }
 
-type Lookup<TValue extends string | number | undefined = string, TReturnValue = unknown> = { [K in NonNullable<TValue>]: MaybeCallable<TReturnValue> }
+type Lookup<TValue extends string | number | undefined, TReturnValue> = {
+	[K in NonNullable<TValue>]: MaybeCallable<TReturnValue>
+}
 
 /**
  * Matches a value against a lookup table.
@@ -86,21 +88,25 @@ type Lookup<TValue extends string | number | undefined = string, TReturnValue = 
  */
 export function match<
 	TValue extends string | number | undefined,
-	TReturnValue = unknown,
-	TLookup extends(Lookup<TValue, TReturnValue> | (Partial<Lookup<TValue, TReturnValue>> & DefaultLookup<TReturnValue>)) = Lookup<TValue, TReturnValue>,
+	TLookup extends(Lookup<TValue, TReturnValue> | (Partial<Lookup<TValue, TReturnValue>> & DefaultLookup<TReturnValue>)),
+	TReturnValue,
 >(
 	value: TValue,
 	lookup: TLookup,
 	...args: any[]
-): TReturnValue {
+): TLookup extends Lookup<TValue, infer U>
+		? U
+		: TLookup extends (Partial<Lookup<TValue, infer V>> & DefaultLookup<infer V>)
+			? V
+			: never {
 	if (value! in lookup) {
-		const returnValue = lookup[value!]
+		const returnValue = lookup[value!] as TLookup[NonNullable<TValue>]
 		return isFunction(returnValue) ? returnValue(...args) : returnValue
 	}
 
 	if ('default' in lookup) {
-		const returnValue = lookup.default
-		return isFunction(returnValue) ? returnValue(...args) : returnValue!
+		const returnValue = lookup.default as TLookup[NonNullable<TValue>]
+		return isFunction(returnValue) ? returnValue(...args) : returnValue
 	}
 
 	const handlers = Object.keys(lookup)
