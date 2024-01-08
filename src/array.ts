@@ -209,8 +209,9 @@ export function shuffle<T>(array: T[]): T[] {
 }
 
 // TODO: types, see @clickbar/dot-diver
+
 /**
- * Undots the given object to a nested object.
+ * Expands a single-dimensional object that uses "dot" notation into a multi-dimensional object.
  */
 export function undot<T extends object>(input: T): any {
 	const result: Record<string, any> = {}
@@ -238,8 +239,9 @@ export function undot<T extends object>(input: T): any {
 
 	return result as any
 }
+
 /**
- * Dots the given object to a single-dimension object.
+ * Flattens a multi-dimensional object into a single-level object that uses "dot" notation to indicate depth:.
  */
 export function dot<T extends Record<string, any>>(input?: T): Record<string, any> {
 	const result: Record<string, any> = {}
