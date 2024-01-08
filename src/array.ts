@@ -238,3 +238,27 @@ export function undot<T extends object>(input: T): any {
 
 	return result as any
 }
+/**
+ * Dots the given object to a single-dimension object.
+ */
+export function dot<T extends Record<string, any>>(input?: T): Record<string, any> {
+	const result: Record<string, any> = {}
+
+	function flatten(obj?: Record<string, any>, path: string[] = []) {
+		for (const key in obj) {
+			const value = obj[key]
+
+			if (Array.isArray(value)) {
+				result[[...path, key].join('.')] = value as string[]
+			} else if (typeof value === 'object' && value !== null) {
+				flatten(value, [...path, key])
+			} else {
+				result[[...path, key].join('.')] = value
+			}
+		}
+	}
+
+	flatten(input)
+
+	return result
+}

@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest'
-import { flattenArrayable, partition, range, toArray, undot } from './array'
+import { flattenArrayable, partition, range, toArray, undot, dot } from './array'
 
 describe('toArray', () => {
 	it.each([
@@ -133,5 +133,63 @@ describe('undot', () => {
 
 	it('is typed', () => {
 		expectTypeOf(undot({ 'foo.bar': 'baz' })).toMatchTypeOf<{ foo: { bar: string } }>()
+	})
+})
+
+describe('dot', () => {
+	it('should dot to keyed collection', () => {
+		expect(dot({
+			name: 'Taylor',
+			meta: {
+				foo: 'bar',
+				baz: ['boom', 'boom', 'boom'],
+				bam: {
+					boom: 'bip',
+				},
+			},
+		})).to.eql({
+			'name': 'Taylor',
+			'meta.foo': 'bar',
+			'meta.baz': ['boom', 'boom', 'boom'],
+			'meta.bam.boom': 'bip',
+		})
+	})
+
+	it('should dot to indexed collection', () => {
+		expect(dot({
+			foo: {
+				0: 'bar',
+				1: 'baz',
+				baz: 'boom',
+			},
+		})).to.eql({
+			'foo.0': 'bar',
+			'foo.1': 'baz',
+			'foo.baz': 'boom',
+		})
+	})
+
+	it('should dot documentation example', () => {
+		expect(dot({
+			name: {
+				first_name: 'Marie',
+				last_name: 'Valentine',
+			},
+			address: {
+				line_1: '2992 Eagle Drive',
+				line_2: '',
+				suburb: 'Detroit',
+				state: 'MI',
+				postcode: '48219',
+			},
+		})).to.eql({
+			'name.first_name': 'Marie',
+			'name.last_name': 'Valentine',
+			'address.line_1': '2992 Eagle Drive',
+			'address.line_2': '',
+			'address.suburb': 'Detroit',
+			'address.state': 'MI',
+			'address.postcode': '48219',
+		})
 	})
 })
