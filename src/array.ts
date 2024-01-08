@@ -207,3 +207,34 @@ export function shuffle<T>(array: T[]): T[] {
 
 	return array
 }
+
+// TODO: types, see @clickbar/dot-diver
+/**
+ * Undots the given object to a nested object.
+ */
+export function undot<T extends object>(input: T): any {
+	const result: Record<string, any> = {}
+
+	for (const key in input) {
+		const value = input[key]
+
+		if (key.includes('.')) {
+			const nestedKeys = key.split('.')
+			let currentLevel = result
+
+			for (let i = 0; i < nestedKeys.length; i++) {
+				const nestedKey = nestedKeys[i]
+
+				if (!currentLevel[nestedKey]) {
+					currentLevel[nestedKey] = i === nestedKeys.length - 1 ? value : {}
+				}
+
+				currentLevel = currentLevel[nestedKey]
+			}
+		} else {
+			result[key] = value
+		}
+	}
+
+	return result as any
+}
