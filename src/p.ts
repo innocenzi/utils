@@ -7,8 +7,8 @@ const VOID = Symbol('p-void')
 
 interface POptions {
 	/**
-   * How many promises are resolved at the same time.
-   */
+	 * How many promises are resolved at the same time.
+	 */
 	concurrency?: number | undefined
 }
 
@@ -42,7 +42,7 @@ class PInstance<T = any> extends Promise<Awaited<T>[]> {
 	map<U>(fn: (value: Awaited<T>, index: number) => U): PInstance<Promise<U>> {
 		return new PInstance(
 			Array.from(this.items)
-				.map(async(i, idx) => {
+				.map(async (i, idx) => {
 					const v = await i
 					if ((v as any) === VOID) {
 						return VOID as unknown as U
@@ -57,7 +57,7 @@ class PInstance<T = any> extends Promise<Awaited<T>[]> {
 	filter(fn: (value: Awaited<T>, index: number) => boolean | Promise<boolean>): PInstance<Promise<T>> {
 		return new PInstance(
 			Array.from(this.items)
-				.map(async(i, idx) => {
+				.map(async (i, idx) => {
 					const v = await i
 					const r = await fn(v, idx)
 					if (!r) {

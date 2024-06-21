@@ -35,12 +35,12 @@ export type DeepMerge<F, S> = MergeInsertions<{
 				: never;
 }>
 
-export type Vector2 = {
+export interface Vector2 {
 	x: number
 	y: number
 }
 
-export type Vector3 = {
+export interface Vector3 {
 	x: number
 	y: number
 	z: number

@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest'
-import { flattenArrayable, partition, range, toArray, undot, dot } from './array'
+import { dot, flattenArrayable, partition, range, toArray, undot } from './array'
 
 describe('toArray', () => {
 	it.each([

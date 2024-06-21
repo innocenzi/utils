@@ -11,7 +11,7 @@ export const isNull = (val: any): val is null => getTypeAsString(val) === '[obje
 export const isRegExp = (val: any): val is RegExp => getTypeAsString(val) === '[object RegExp]'
 export const isDate = (val: any): val is Date => getTypeAsString(val) === '[object Date]'
 
-// @ts-ignore
+// @ts-expect-error window is not typed here
 export const isWindow = (val: any): boolean => typeof window !== 'undefined' && getTypeAsString(val) === '[object Window]'
-// @ts-ignore
+// @ts-expect-error window is not typed here
 export const isBrowser = typeof window !== 'undefined'

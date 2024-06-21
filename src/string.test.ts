@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { capitalize, ensureStartsWith, ensureEndsWith, toForwardSlashes, template, toBackSlashes, replaceFirst, replaceLast, before, beforeLast, after, afterLast, between, betweenShrink, squish, mask } from './string'
+import { after, afterLast, before, beforeLast, between, betweenShrink, capitalize, ensureEndsWith, ensureStartsWith, mask, replaceFirst, replaceLast, squish, template, toBackSlashes, toForwardSlashes } from './string'
 
 it('template', () => {
 	expect(

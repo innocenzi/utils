@@ -124,7 +124,7 @@ export function match<
 
 /**
  * Asynchronously tries the specified promise.
- * 
+ *
  * @example
  * ```
  * const [result, error] = await tryAsync(fetch(url))

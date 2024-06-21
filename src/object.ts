@@ -1,3 +1,4 @@
+/* eslint-disable ts/ban-ts-comment */
 import { notNullish } from './guards'
 import { isObject } from './is'
 import type { DeepMerge } from './types'
@@ -213,7 +214,7 @@ export function objectOmit<O extends object, T extends keyof O>(obj: O, keys: T[
  * @category Object
  */
 export function clearUndefined<T extends object>(obj: T): T {
-	// @ts-expect-error
+	// @ts-expect-error Object.keys is badly typed
 	Object.keys(obj).forEach((key: string) => (obj[key] === undefined ? delete obj[key] : {}))
 	return obj
 }

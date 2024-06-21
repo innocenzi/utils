@@ -4,9 +4,9 @@ import type { Fn } from './types'
 export interface SingletonPromiseReturn<T> {
 	(): Promise<T>
 	/**
-   * Resets the current staled promise.
-   * Await it to have proper shutdown.
-   */
+	 * Resets the current staled promise.
+	 * Await it to have proper shutdown.
+	 */
 	reset: () => Promise<void>
 }
 
@@ -35,7 +35,7 @@ export function createSingletonPromise<T>(fn: () => Promise<T>): SingletonPromis
 		return _promise
 	}
 
-	wrapper.reset = async() => {
+	wrapper.reset = async () => {
 		const _prev = _promise
 		_promise = undefined
 		if (_prev) {
@@ -54,7 +54,7 @@ export function createSingletonPromise<T>(fn: () => Promise<T>): SingletonPromis
 export function sleep(ms: number, callback?: Fn<any>) {
 	return new Promise<void>((resolve) =>
 
-		setTimeout(async() => {
+		setTimeout(async () => {
 			await callback?.()
 			resolve()
 		}, ms),
@@ -106,8 +106,8 @@ export function createDefferedPromise() {
  * Promise with `resolve` and `reject` methods of itself
  */
 export interface ControlledPromise<T = void> extends Promise<T> {
-	resolve(value: T | PromiseLike<T>): void
-	reject(reason?: any): void
+	resolve: (value: T | PromiseLike<T>) => void
+	reject: (reason?: any) => void
 }
 
 /**
