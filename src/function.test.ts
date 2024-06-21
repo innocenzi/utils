@@ -1,5 +1,5 @@
-import { expect, expectTypeOf, it } from 'vitest'
-import { asyncInvoke, invoke, match, tap, value } from './function'
+import { expect, expectTypeOf, it, describe, vi } from 'vitest'
+import { asyncInvoke, invoke, match, tap, tryAsync, value } from './function'
 
 it('invoke', async() => {
 	expect(invoke(undefined)).toBeUndefined()
@@ -83,3 +83,24 @@ it('match', () => {
 	expectTypeOf(match(123, { 100: 'foo', 200: 'bar', default: 'baz' })).toBeString()
 	expectTypeOf(match('bar' as string | number, { foo: 'a', default: 'b' })).toMatchTypeOf<string | number>()
 })
+
+describe("tryAsync", () => {
+	it('returns the specified value', async () => {
+		const [data, error] = await tryAsync(async () => ({
+			foo: 'bar'
+		}));
+
+		expect(data).toStrictEqual({ foo: "bar" });
+		expect(error).toBeNull();
+	})
+
+	it('returns the error', async () => {
+		const [data, error] = await tryAsync(async () => {
+			throw new Error('You are a failure, said your father')
+		});
+
+		expect(data).toBeNull();
+		expect(error).toBeInstanceOf(Error);
+		expect((error as Error).message).toBe('You are a failure, said your father');
+	})
+});

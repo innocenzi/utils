@@ -121,3 +121,22 @@ export function match<
 
 	throw error
 }
+
+/**
+ * Asynchronously tries the specified promise.
+ * 
+ * @example
+ * ```
+ * const [result, error] = await tryAsync(fetch(url))
+ */
+export async function tryAsync<T>(fn: AwaitableFn<T>): Promise<[T, null] | [null, Error]> {
+	try {
+		const data = await fn?.()
+		return [data, null]
+	} catch (throwable) {
+		if (throwable instanceof Error) {
+			return [null, throwable]
+		}
+		throw throwable
+	}
+}
