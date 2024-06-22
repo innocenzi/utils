@@ -102,7 +102,8 @@ export function deepMerge<T extends object = object, S extends object = T>(targe
 
 				// @ts-expect-error
 				if (isMergableObject(target[key])) {
-					// @ts-expect-error
+					// eslint-disable-next-line ts/prefer-ts-expect-error
+					// @ts-ignore
 					deepMerge(target[key], source[key])
 				} else {
 					// @ts-expect-error

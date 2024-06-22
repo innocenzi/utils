@@ -1,4 +1,4 @@
-import { describe, expect, expectTypeOf, it } from 'vitest'
+import { describe, expect, expectTypeOf, it, test } from 'vitest'
 import { dot, flattenArrayable, partition, range, toArray, undot } from './array'
 
 describe('toArray', () => {
@@ -16,7 +16,7 @@ describe('toArray', () => {
 	})
 })
 
-it('flattenArrayable', () => {
+test('flattenArrayable', () => {
 	expect(flattenArrayable()).toEqual([])
 	expect(flattenArrayable([])).toEqual([])
 	expect(flattenArrayable(1)).toEqual([1])
@@ -25,7 +25,7 @@ it('flattenArrayable', () => {
 	expect(flattenArrayable([1, [1, [2]]])).toEqual([1, 1, [2]])
 })
 
-it('range', () => {
+test('range', () => {
 	expect(range(0)).toEqual([])
 	expect(range(2)).toEqual([0, 1])
 	expect(range(2, 5)).toEqual([2, 3, 4])
@@ -33,7 +33,7 @@ it('range', () => {
 	expect(range(3, 0, -1)).toEqual([3, 2, 1])
 })
 
-it('partition', () => {
+test('partition', () => {
 	const data = range(10)
 
 	expect(

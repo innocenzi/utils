@@ -1,7 +1,7 @@
-import { expect, it } from 'vitest'
+import { expect, test } from 'vitest'
 import { isDeepEqual } from './equal'
 
-it('equal', () => {
+test('equal', () => {
 	expect(isDeepEqual(
 		[1, 2, [3, 4], 'foo', { bar: 'baz', qux: [1, 2, 3] }],
 		[1, 2, [3, 4], 'foo', { bar: 'baz', qux: [1, 2, 3] }],

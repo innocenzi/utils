@@ -1,7 +1,7 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, test } from 'vitest'
 import { deepMerge, deepMergeWithArray, objectMap, objectOmit } from './object'
 
-it('objectMap', () => {
+test('objectMap', () => {
 	expect(objectMap({}, (...args) => args)).toEqual({})
 
 	expect(
@@ -78,7 +78,7 @@ describe('deepMergeWithArray', () => {
 	})
 })
 
-it('objectOmit', () => {
+test('objectOmit', () => {
 	const obj = {
 		foo: 'bar',
 		baz: 'qux',

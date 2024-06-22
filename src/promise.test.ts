@@ -1,7 +1,7 @@
-import { expect, it } from 'vitest'
+import { expect, test } from 'vitest'
 import { createSingletonPromise, sleep } from './promise'
 
-it('promise', async () => {
+test('promise', async () => {
 	let dummy = 0
 
 	const promise = createSingletonPromise(async () => {

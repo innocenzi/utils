@@ -1,7 +1,7 @@
-import { expect, it } from 'vitest'
+import { expect, test } from 'vitest'
 import { lerp, remap, sum } from './math'
 
-it('sum', () => {
+test('sum', () => {
 	expect(sum(1, 2, 3)).toEqual(6)
 	expect(sum([1, 2, 3])).toEqual(6)
 	expect(sum([1], [2, 3])).toEqual(6)
@@ -10,7 +10,7 @@ it('sum', () => {
 	expect(sum(1, 2, [1, 2, 3])).toEqual(9)
 })
 
-it('lerp', () => {
+test('lerp', () => {
 	expect(lerp(0, 2, 0)).toEqual(0)
 	expect(lerp(0, 2, 1)).toEqual(2)
 	expect(lerp(0, 2, 0.5)).toEqual(1)
@@ -22,7 +22,7 @@ it('lerp', () => {
 	expect(lerp(0, 1, 2.5)).toEqual(1)
 })
 
-it('remap', () => {
+test('remap', () => {
 	expect(remap(0, 0, 1, 0, 10)).toEqual(0)
 	expect(remap(1, 0, 1, 0, 10)).toEqual(10)
 	expect(remap(0.5, 0, 1, 0, 10)).toEqual(5)

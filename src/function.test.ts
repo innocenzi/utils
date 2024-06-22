@@ -1,31 +1,31 @@
-import { describe, expect, expectTypeOf, it } from 'vitest'
+import { describe, expect, expectTypeOf, it, test } from 'vitest'
 import { asyncInvoke, invoke, match, tap, tryAsync, value } from './function'
 
-it('invoke', async () => {
+test('invoke', async () => {
 	expect(invoke(undefined)).toBeUndefined()
 	expect(invoke(() => 'foo')).toBe('foo')
 })
 
-it('asyncInvoke', async () => {
+test('asyncInvoke', async () => {
 	expect(await Promise.all([
 		asyncInvoke(async () => 'foo'),
 		asyncInvoke(async () => 'bar'),
 	])).toStrictEqual(['foo', 'bar'])
 })
 
-it('value', () => {
+test('value', () => {
 	expect(value(undefined)).toBeUndefined()
 	expect(value('foo')).toBe('foo')
 	expect(value(() => 'foo')).toBe('foo')
 })
 
-it('tap', () => {
+test('tap', () => {
 	expect(tap(1, (value) => value++)).toEqual(1)
 	expect(tap(undefined, (value) => value)).toBeUndefined()
 	expect(tap({ a: 1 }, (obj) => obj.a++)).toEqual({ a: 2 })
 })
 
-it('match', () => {
+test('match', () => {
 	expect(match('foo', {
 		foo: '1',
 	})).toEqual('1')
