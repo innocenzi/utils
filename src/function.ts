@@ -140,3 +140,22 @@ export async function tryAsync<T>(fn: AwaitableFn<T>): Promise<[T, null] | [null
 		throw throwable
 	}
 }
+
+/**
+ * Memoizes a value.
+ *
+ * @example
+ * ```
+ * const result = memoize(() => expensiveFn())
+ * result.value // computed
+ * result.value // memoized
+ */
+export function memoize<T>(getter: () => T): { value: T } {
+	return {
+		get value() {
+			const value = getter()
+			Object.defineProperty(this, 'value', { value })
+			return value
+		},
+	}
+}

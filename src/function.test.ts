@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it, test } from 'vitest'
-import { asyncInvoke, invoke, match, tap, tryAsync, value } from './function'
+import { asyncInvoke, invoke, match, memoize, tap, tryAsync, value } from './function'
 
 test('invoke', async () => {
 	expect(invoke(undefined)).toBeUndefined()
@@ -103,4 +103,16 @@ describe('tryAsync', () => {
 		expect(error).toBeInstanceOf(Error)
 		expect((error as Error).message).toBe('You are a failure, said your father')
 	})
+})
+
+test('memoize', () => {
+	let count = 0
+
+	const result = memoize(() => {
+		count++
+		return count
+	})
+
+	expect(result.value).toBe(1)
+	expect(result.value).toBe(1)
 })
