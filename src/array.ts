@@ -40,9 +40,30 @@ export type PartitionFilter<T> = (i: T, idx: number, arr: readonly T[]) => any
 export function partition<T>(array: readonly T[], f1: PartitionFilter<T>): [T[], T[]]
 export function partition<T>(array: readonly T[], f1: PartitionFilter<T>, f2: PartitionFilter<T>): [T[], T[], T[]]
 export function partition<T>(array: readonly T[], f1: PartitionFilter<T>, f2: PartitionFilter<T>, f3: PartitionFilter<T>): [T[], T[], T[], T[]]
-export function partition<T>(array: readonly T[], f1: PartitionFilter<T>, f2: PartitionFilter<T>, f3: PartitionFilter<T>, f4: PartitionFilter<T>): [T[], T[], T[], T[], T[]]
-export function partition<T>(array: readonly T[], f1: PartitionFilter<T>, f2: PartitionFilter<T>, f3: PartitionFilter<T>, f4: PartitionFilter<T>, f5: PartitionFilter<T>): [T[], T[], T[], T[], T[], T[]]
-export function partition<T>(array: readonly T[], f1: PartitionFilter<T>, f2: PartitionFilter<T>, f3: PartitionFilter<T>, f4: PartitionFilter<T>, f5: PartitionFilter<T>, f6: PartitionFilter<T>): [T[], T[], T[], T[], T[], T[], T[]]
+export function partition<T>(
+	array: readonly T[],
+	f1: PartitionFilter<T>,
+	f2: PartitionFilter<T>,
+	f3: PartitionFilter<T>,
+	f4: PartitionFilter<T>,
+): [T[], T[], T[], T[], T[]]
+export function partition<T>(
+	array: readonly T[],
+	f1: PartitionFilter<T>,
+	f2: PartitionFilter<T>,
+	f3: PartitionFilter<T>,
+	f4: PartitionFilter<T>,
+	f5: PartitionFilter<T>,
+): [T[], T[], T[], T[], T[], T[]]
+export function partition<T>(
+	array: readonly T[],
+	f1: PartitionFilter<T>,
+	f2: PartitionFilter<T>,
+	f3: PartitionFilter<T>,
+	f4: PartitionFilter<T>,
+	f5: PartitionFilter<T>,
+	f6: PartitionFilter<T>,
+): [T[], T[], T[], T[], T[], T[], T[]]
 export function partition<T>(array: readonly T[], ...filters: PartitionFilter<T>[]): any {
 	const result: T[][] = Array.from({ length: filters.length + 1 }).fill(null).map(() => [])
 
@@ -146,10 +167,10 @@ export function range(...args: any): number[] {
 
 	if (args.length === 1) {
 		start = 0
-		step = 1;
-		([stop] = args)
+		step = 1
+		;[stop] = args
 	} else {
-		([start, stop, step = 1] = args)
+		;[start, stop, step = 1] = args
 	}
 
 	const arr: number[] = []
@@ -201,8 +222,8 @@ export function sample<T>(arr: T[], quantity: number) {
  */
 export function shuffle<T>(array: T[]): T[] {
 	for (let i = array.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1));
-		[array[i], array[j]] = [array[j], array[i]]
+		const j = Math.floor(Math.random() * (i + 1))
+		;[array[i], array[j]] = [array[j], array[i]]
 	}
 
 	return array
@@ -263,4 +284,36 @@ export function dot<T extends Record<string, any>>(input?: T): Record<string, an
 	flatten(input)
 
 	return result
+}
+
+/**
+ * Joins an array of strings with a separator, using a different separator for the last item.
+ */
+export function join<T>(
+	array: T[],
+	options: { separator?: string; lastSeparator?: string } = {},
+): string {
+	options = {
+		separator: ', ',
+		lastSeparator: ' and ',
+		...options,
+	}
+
+	if (array.length === 0) {
+		return ''
+	}
+
+	if (array.length === 1) {
+		return String(array[0])
+	}
+
+	if (array.length === 2) {
+		return `${array[0]}${options.lastSeparator}${array[1]}`
+	}
+
+	// For arrays with 3+ items
+	const allButLast = array.slice(0, -1)
+	const lastItem = array[array.length - 1]
+
+	return `${allButLast.join(options.separator)}${options.lastSeparator}${lastItem}`
 }

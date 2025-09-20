@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it, test } from 'vitest'
-import { dot, flattenArrayable, partition, range, toArray, undot } from './array'
+import { dot, flattenArrayable, join, partition, range, toArray, undot } from './array'
 
 describe('toArray', () => {
 	it.each([
@@ -191,5 +191,27 @@ describe('dot', () => {
 			'address.state': 'MI',
 			'address.postcode': '48219',
 		})
+	})
+})
+
+describe('join', () => {
+	it('should join 3+ items with default separators', () => {
+		expect(join(['a', 'b', 'c'])).toBe('a, b and c')
+	})
+
+	it('should handle two items', () => {
+		expect(join(['a', 'b'])).toBe('a and b')
+	})
+
+	it('should handle single item', () => {
+		expect(join(['a'])).toBe('a')
+	})
+
+	it('should handle empty array', () => {
+		expect(join([])).toBe('')
+	})
+
+	it('should use custom separators', () => {
+		expect(join(['a', 'b', 'c'], { separator: ' | ', lastSeparator: ' or ' })).toBe('a | b or c')
 	})
 })
