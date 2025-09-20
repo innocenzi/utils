@@ -7,10 +7,12 @@ test('invoke', async () => {
 })
 
 test('asyncInvoke', async () => {
-	expect(await Promise.all([
-		asyncInvoke(async () => 'foo'),
-		asyncInvoke(async () => 'bar'),
-	])).toStrictEqual(['foo', 'bar'])
+	expect(
+		await Promise.all([
+			asyncInvoke(async () => 'foo'),
+			asyncInvoke(async () => 'bar'),
+		]),
+	).toStrictEqual(['foo', 'bar'])
 })
 
 test('value', () => {

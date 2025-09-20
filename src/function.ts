@@ -88,25 +88,28 @@ type Lookup<TValue extends string | number | undefined, TReturnValue> = {
  */
 export function match<
 	TValue extends string | number | undefined,
-	TLookup extends(Lookup<TValue, TReturnValue> | (Partial<Lookup<TValue, TReturnValue>> & DefaultLookup<TReturnValue>)),
+	TLookup extends (Lookup<TValue, TReturnValue> | (Partial<Lookup<TValue, TReturnValue>> & DefaultLookup<TReturnValue>)),
 	TReturnValue,
 >(
 	value: TValue,
 	lookup: TLookup,
 	...args: any[]
-): TLookup extends Lookup<TValue, infer U>
-		? U
-		: TLookup extends (Partial<Lookup<TValue, infer V>> & DefaultLookup<infer V>)
-			? V
-			: never {
+): TLookup extends Lookup<TValue, infer U> ? U
+	: TLookup extends (Partial<Lookup<TValue, infer V>> & DefaultLookup<infer V>) ? V
+	: never
+{
+	type ReturnType = TLookup extends Lookup<TValue, infer U> ? U
+		: TLookup extends (Partial<Lookup<TValue, infer V>> & DefaultLookup<infer V>) ? V
+		: never
+
 	if (value! in lookup) {
 		const returnValue = lookup[value!] as TLookup[NonNullable<TValue>]
-		return isFunction(returnValue) ? returnValue(...args) : returnValue
+		return (isFunction(returnValue) ? returnValue(...args) : returnValue) as ReturnType
 	}
 
 	if ('default' in lookup) {
 		const returnValue = lookup.default as TLookup[NonNullable<TValue>]
-		return isFunction(returnValue) ? returnValue(...args) : returnValue
+		return (isFunction(returnValue) ? returnValue(...args) : returnValue) as ReturnType
 	}
 
 	const handlers = Object.keys(lookup)
