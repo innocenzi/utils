@@ -1,62 +1,53 @@
 {
-  "name": "@innocenzi/utils",
-  "publishConfig": {
-    "access": "public"
-  },
-  "type": "module",
-  "version": "0.3.0",
-  "packageManager": "pnpm@9.15.0",
-  "description": "Opinionated collection of TypeScript utilities",
-  "author": "Enzo Innocenzi <enzo@innocenzi.dev>",
-  "license": "MIT",
-  "funding": "https://github.com/sponsors/innocenzi",
-  "homepage": "https://github.com/innocenzi/utils#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/innocenzi/utils.git"
-  },
-  "bugs": {
-    "url": "https://github.com/innocenzi/utils/issues"
-  },
-  "keywords": [
-    "utils"
-  ],
-  "sideEffects": false,
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "files": [
-    "*.d.ts",
-    "dist"
-  ],
-  "scripts": {
-    "build": "unbuild",
-    "dev": "nr build --watch",
-    "prepublishOnly": "npm run build",
-    "release": "bumpp --commit \"release: v\" && npm publish",
-    "start": "esno src/index.ts",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest"
-  },
-  "dependencies": {
-    "dprint": "^0.50.2",
-    "p-limit": "^7.1.1",
-    "throttle-debounce": "5.0.2"
-  },
-  "devDependencies": {
-    "@types/node": "^24.5.2",
-    "@types/throttle-debounce": "^5.0.2",
-    "bumpp": "^9.9.0",
-    "typescript": "^5.7.2",
-    "unbuild": "^2.0.0",
-    "vite": "^7.1.6",
-    "vitest": "^3.2.4"
-  }
+	"name": "@innocenzi/utils",
+	"publishConfig": {
+		"access": "public"
+	},
+	"type": "module",
+	"version": "0.3.0",
+	"packageManager": "bun@1.22.2",
+	"description": "Opinionated collection of TypeScript utilities",
+	"author": "Enzo Innocenzi <enzo@innocenzi.dev>",
+	"license": "MIT",
+	"funding": "https://github.com/sponsors/innocenzi",
+	"homepage": "https://github.com/innocenzi/utils#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/innocenzi/utils.git"
+	},
+	"bugs": {
+		"url": "https://github.com/innocenzi/utils/issues"
+	},
+	"keywords": ["utils"],
+	"sideEffects": false,
+	"exports": {
+		".": "./dist/index.mjs"
+	},
+	"main": "dist/index.mjs",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.mts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "unbuild",
+		"dev": "nr build --watch",
+		"prepublishOnly": "npm run build",
+		"release": "bumpp --commit \"release: v\" && npm publish",
+		"start": "bun src/index.ts",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest"
+	},
+	"devDependencies": {
+		"dprint": "^0.50.2",
+		"p-limit": "^7.1.1",
+		"throttle-debounce": "5.0.2",
+		"@types/node": "^24.5.2",
+		"@types/throttle-debounce": "^5.0.2",
+		"bumpp": "^10.2.3",
+		"typescript": "^5.9.2",
+		"unbuild": "^3.6.1",
+		"vite": "^7.1.6",
+		"vitest": "^3.2.4"
+	}
 }

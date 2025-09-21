@@ -10,25 +10,6 @@ on:
       - main
 
 jobs:
-  typecheck:
-    if: ${{ !startsWith(github.event.head_commit.message, 'release:') }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 22.x
-
-      - name: Setup
-        run: npm i -g @antfu/ni
-
-      - name: Install
-        run: nci
-
-      - name: Typecheck
-        run: nr typecheck
-
   test:
     if: ${{ !startsWith(github.event.head_commit.message, 'release:') }}
     runs-on: ${{ matrix.os }}
@@ -41,19 +22,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set node ${{ matrix.node }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node }}
-
-      - name: Setup
-        run: npm i -g @antfu/ni
+      - uses: oven-sh/setup-bun@v2
 
       - name: Install
-        run: nci
-
-      - name: Build
-        run: nr build
+        run: bun install
 
       - name: Test
-        run: nr test
+        run: |
+          bun run build
+          bun run test
+          bun run typecheck
