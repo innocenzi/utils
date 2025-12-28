@@ -10,6 +10,7 @@
         "dprint": "^0.51.0",
         "p-limit": "^7.2.0",
         "throttle-debounce": "5.0.2",
+        "ts-switch-case": "^1.0.5",
         "typescript": "^5.9.3",
         "unbuild": "^3.6.1",
         "vite": "^7.3.0",
@@ -453,6 +454,8 @@
     "tinyglobby": ["tinyglobby@0.2.15", "", { "dependencies": { "fdir": "^6.5.0", "picomatch": "^4.0.3" } }, "sha512-j2Zq4NyQYG5XMST4cbs02Ak8iJUdxRM0XI5QyxXuZOzKOINmWurp3smXu3y5wDcJrptwpSjgXHzIQxR0omXljQ=="],
 
     "tinyrainbow": ["tinyrainbow@3.0.3", "", {}, "sha512-PSkbLUoxOFRzJYjjxHJt9xro7D+iilgMX/C9lawzVuYiIdcihh9DXmVibBe8lmcFrRi/VzlPjBxbN7rH24q8/Q=="],
+
+    "ts-switch-case": ["ts-switch-case@1.0.5", "", {}, "sha512-yz7A+P7We+DBuNRFaX5gAcaGLFcPrc6+S0GE6ovPP8jZ1g+kWx7idbyUqNqGrelqm5eAXWcR2H9A7SoENPUyDQ=="],
 
     "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
 

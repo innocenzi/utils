@@ -40,14 +40,12 @@ test('match', () => {
 	expect(match('foo' as 'foo' | 'bar', {
 		foo: '1',
 		bar: '2',
-		default: 'nope',
-	})).toEqual('1')
+	}, () => 'nope')).toEqual('1')
 
 	expect(match('owo' as 'foo' | 'bar', {
 		foo: '1',
 		bar: '2',
-		default: 'uwu',
-	})).toEqual('uwu')
+	}, () => 'uwu')).toEqual('uwu')
 
 	// @ts-expect-error missing 'default' or 'bar'
 	expect(match('foo' as 'foo' | 'bar', {
@@ -59,31 +57,11 @@ test('match', () => {
 		bar: () => '2',
 	})).toBe('1')
 
-	expect(match(undefined as 'foo' | 'bar' | undefined, {
-		foo: () => '1',
-		bar: () => '2',
-		default: 'foo',
-	})).toBe('foo')
-
-	expect(match('foo' as 'foo' | 'bar' | undefined, {
-		bar: () => '2',
-		default: '1',
-	})).toBe('1')
-
-	expect(match(123, {
-		100: 'foo',
-		200: 'bar',
-		default: 'baz',
-	})).toBe('baz')
-
-	expectTypeOf(match('foo', { foo: () => 1, bar: () => 2 })).toBeNumber()
-	expectTypeOf(match('foo', { foo: () => 'a', bar: () => 'b' })).toBeString()
-	expectTypeOf(match('foo', { foo: () => 'a', bar: () => 'b', default: () => 'c' })).toBeString()
-	expectTypeOf(match('foo', { foo: 1, bar: 2 })).toBeNumber()
-	expectTypeOf(match('foo', { baz: 1, bar: 2, default: 3 })).toBeNumber()
-	expectTypeOf(match(123, { 123: 'foo', 200: 'bar' })).toBeString()
-	expectTypeOf(match(123, { 100: 'foo', 200: 'bar', default: 'baz' })).toBeString()
-	expectTypeOf(match('bar' as string | number, { foo: 'a', default: 'b' })).toMatchTypeOf<string | number>()
+	expectTypeOf(match('foo', { foo: () => 1 })).toBeNumber()
+	expectTypeOf(match('foo', { foo: () => 'a' })).toBeString()
+	expectTypeOf(match('foo', { foo: 1 })).toBeNumber()
+	expectTypeOf(match(123, { 123: 'foo' })).toBeString()
+	expectTypeOf(match('bar' as string | number, { foo: 'a' }, () => 'baz')).toExtend<string | number>()
 })
 
 describe('tryAsync', () => {
