@@ -18,7 +18,9 @@
 	"bugs": {
 		"url": "https://github.com/innocenzi/utils/issues"
 	},
-	"keywords": ["utils"],
+	"keywords": [
+		"utils"
+	],
 	"sideEffects": false,
 	"exports": {
 		".": "./dist/index.mjs"
@@ -39,15 +41,15 @@
 		"test": "vitest"
 	},
 	"devDependencies": {
-		"dprint": "^0.50.2",
-		"p-limit": "^7.1.1",
-		"throttle-debounce": "5.0.2",
-		"@types/node": "^24.5.2",
+		"@types/node": "^25.0.3",
 		"@types/throttle-debounce": "^5.0.2",
-		"bumpp": "^10.2.3",
-		"typescript": "^5.9.2",
+		"bumpp": "^10.3.2",
+		"dprint": "^0.51.0",
+		"p-limit": "^7.2.0",
+		"throttle-debounce": "5.0.2",
+		"typescript": "^5.9.3",
 		"unbuild": "^3.6.1",
-		"vite": "^7.1.6",
-		"vitest": "^3.2.4"
+		"vite": "^7.3.0",
+		"vitest": "^4.0.16"
 	}
 }
